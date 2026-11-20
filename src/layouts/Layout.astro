@@ -25,13 +25,15 @@ const {
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="author" content={profile.name} />
-		<meta name="keywords" content="cryptography, cybersecurity, post-quantum, researcher, engineer, Kyber, Dilithium" />
+		<meta name="keywords" content="cryptography, cybersecurity, post-quantum, formal verification, EasyCrypt, researcher, engineer, Kyber, Dilithium" />
+		<link rel="canonical" href="https://mattc-try.github.io/" />
 		
 		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:site_name" content={profile.name} />
+		<meta property="og:url" content="https://mattc-try.github.io/" />
 		
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -55,7 +57,8 @@ const {
 			"url": "https://mattc-try.github.io/",
 			"sameAs": [
 				profile.github,
-				profile.linkedin
+				profile.linkedin,
+				profile.orcid
 			].filter(Boolean)
 		})} />
 		
@@ -65,18 +68,18 @@ const {
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
 		
 		<!-- Theme Color -->
-		<meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+		<meta name="theme-color" content="#f7f5ef" id="theme-color-meta" />
 		
 		<!-- Prevent flash of wrong theme -->
 		<script is:inline>
 			const theme = localStorage.getItem('theme') || 'light';
 			if (theme === 'dark') {
 				document.documentElement.classList.add('dark');
-				document.getElementById('theme-color-meta')?.setAttribute('content', '#0f172a');
+				document.getElementById('theme-color-meta')?.setAttribute('content', '#171916');
 			}
 		</script>
 	</head>
-	<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-teal-500/30 selection:text-teal-800 dark:selection:text-teal-200 transition-colors duration-300">
+	<body class="bg-[#f7f5ef] dark:bg-[#171916] text-[#20251e] dark:text-[#f1efe7] font-sans antialiased selection:bg-[#d9b7a8]/60 selection:text-[#20251e] transition-colors duration-300">
 		<slot />
 	</body>
 </html>
@@ -97,7 +100,7 @@ const {
 	}
 	
 	::-webkit-scrollbar-thumb {
-		background: #94a3b8;
+		background: #b9b5a8;
 		border-radius: 4px;
 	}
 	
@@ -111,7 +114,7 @@ const {
 	}
 	
 	.dark ::-webkit-scrollbar-thumb {
-		background: #334155;
+		background: #4a4f43;
 	}
 	
 	.dark ::-webkit-scrollbar-thumb:hover {
@@ -128,7 +131,7 @@ const {
 	
 	/* Focus styles for accessibility */
 	:focus-visible {
-		outline: 2px solid #14b8a6;
+		outline: 2px solid #9b604b;
 		outline-offset: 2px;
 	}
 </style>

@@ -2,381 +2,173 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import PaperCard from '../components/PaperCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import SkillCard from '../components/SkillCard.astro';
-import ConferenceCard from '../components/ConferenceCard.astro';
+import { profile, about, publications, conferencePhotos } from '../data/portfolio';
+import { ArrowUpRight, Download, Mail, Smile } from 'lucide-astro';
 
-import { profile, about, publications, projects, readingList, skillCategories, conferencePhotos } from '../data/portfolio';
-import { Github, Mail, MapPin, ArrowDown, ChevronRight, BookOpen, Cpu, Shield, Terminal, FileText, Linkedin, KeyRound, Camera, MessageCircle, Download } from 'lucide-astro';
+const oauthProject = {
+  title: 'Rust Google OAuth2',
+  description: 'OAuth 2.0 implementation in Rust with PKCE, JWT validation, and Askama templates.',
+  techStack: 'Rust · OAuth2 · PKCE · JWT',
+  githubUrl: 'https://github.com/mattc-try/rust-google-oauth2',
+};
 ---
 
 <Layout>
   <Header />
-  
-  <main>
-    <!-- ============================================ -->
-    <!-- HERO SECTION -->
-    <!-- ============================================ -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-      <!-- Background Grid Pattern -->
-      <div class="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-      
-      <!-- Gradient Orbs -->
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl"></div>
-      
-      <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Terminal-style intro - Centered with balanced visual weight -->
-        <div class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 mb-8 shadow-sm">
-          <span class="text-sm font-mono text-slate-600 dark:text-slate-400">
-            📍 {profile.location}
-          </span>
-        </div>
-        
-        <!-- Name -->
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
-          <span class="text-slate-900 dark:text-slate-100">{profile.name.split(' ')[0]}</span>
-          <span class="text-teal-600 dark:text-teal-400"> {profile.name.split(' ')[1]}</span>
-        </h1>
-        
-        <!-- Title -->
-        <p class="text-xl sm:text-2xl md:text-3xl font-mono text-slate-600 dark:text-slate-400 mb-6">
-          {profile.title}
-        </p>
-        
-        <!-- Tagline -->
-        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-          {profile.tagline}
-        </p>
-        
-        <!-- CTA Buttons - Equal widths for optical balance -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <a
-            href={`mailto:${profile.email}`}
-            class="group inline-flex items-center justify-center gap-2 w-full sm:w-48 px-6 py-3 text-base font-medium rounded-lg bg-teal-600 dark:bg-teal-500 text-white dark:text-slate-900 hover:bg-teal-500 dark:hover:bg-teal-400 transition-all duration-300 shadow-lg shadow-teal-500/25"
-          >
-            <Mail class="w-5 h-5" />
-            Get in Touch
-          </a>
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 w-full sm:w-48 px-6 py-3 text-base font-medium rounded-lg bg-white dark:bg-slate-800/50 text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 hover:border-teal-500/50 transition-all duration-300 shadow-sm"
-          >
-            <Download class="w-5 h-5" />
-            Download CV
-          </a>
-        </div>
-        
-        <!-- Social Icons -->
-        <div class="flex items-center justify-center gap-3 flex-wrap">
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="p-3 text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-colors"
-            aria-label="GitHub"
-            title="GitHub"
-          >
-            <Github class="w-6 h-6" />
-          </a>
-          {profile.linkedin && (
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-3 text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-colors"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-            >
-              <Linkedin class="w-6 h-6" />
-            </a>
-          )}
-          <a
-            href={`mailto:${profile.email}`}
-            class="p-3 text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-colors"
-            aria-label="Email"
-            title="Email"
-          >
-            <Mail class="w-6 h-6" />
-          </a>
-          {profile.signal && (
-            <div class="group relative p-3 text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg transition-colors cursor-pointer" title="Signal">
-              <MessageCircle class="w-6 h-6" />
-              <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-white dark:bg-slate-800 text-xs text-teal-600 dark:text-teal-400 font-mono rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-200 dark:border-slate-700 shadow-sm">
-                {profile.signal}
-              </span>
-            </div>
-          )}
-        </div>
-        
-        <!-- Scroll indicator -->
-        <div class="mt-8 flex justify-center">
-          <a href="#about" class="p-2 text-slate-400 dark:text-slate-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors animate-bounce">
-            <ArrowDown class="w-6 h-6" />
-          </a>
+
+  <main class="md:ml-[180px]">
+    <section class="mx-auto max-w-[820px] px-5 py-12 sm:px-8 sm:py-16">
+      <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-[#8b503d] dark:text-[#d89a82]">Cryptography · Formal verification · Security engineering</p>
+      <div class="flex items-center gap-2">
+        <h1 class="text-3xl font-bold tracking-tight text-[#20251e] dark:text-[#f1efe7] sm:text-[38px]">{profile.name}</h1>
+        <Smile class="h-5 w-5 -rotate-6 text-[#9b604b] dark:text-[#d89a82]" aria-label="Smiling portrait mark" />
+      </div>
+      <p class="mt-2 max-w-xl text-sm leading-6 text-[#5f655a] dark:text-[#bbbdb3]">{profile.title}</p>
+
+      <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <a class="inline-flex items-center gap-1.5 font-semibold text-[#20251e] underline decoration-[#9b604b] underline-offset-4 dark:text-[#f1efe7]" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer"><Download class="h-3.5 w-3.5" /> CV</a>
+        <a class="inline-flex items-center gap-1 text-[#60665b] hover:text-[#8b503d] dark:text-[#bbbdb3] dark:hover:text-[#d89a82]" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight class="h-3 w-3" /></a>
+        <a class="inline-flex items-center gap-1 text-[#60665b] hover:text-[#8b503d] dark:text-[#bbbdb3] dark:hover:text-[#d89a82]" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight class="h-3 w-3" /></a>
+        <a class="inline-flex items-center gap-1 text-[#60665b] hover:text-[#8b503d] dark:text-[#bbbdb3] dark:hover:text-[#d89a82]" href={profile.orcid} target="_blank" rel="noopener noreferrer">ORCID <ArrowUpRight class="h-3 w-3" /></a>
+      </div>
+    </section>
+
+    <section id="about" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">About</h2>
+        <div class="max-w-[650px]">
+          <p class="text-[15px] leading-7 text-[#30352e] dark:text-[#d6d7cf]"><span class="mr-1 text-[#9b604b] dark:text-[#d89a82]">✦</span>{about.summary}</p>
+          <p class="mt-3 text-sm leading-6 text-[#666b60] dark:text-[#aeb2a6]">{about.researchInsight}</p>
         </div>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- ABOUT SECTION -->
-    <!-- ============================================ -->
-    <section id="about" class="py-24 bg-slate-100/50 dark:bg-slate-900/50 transition-colors duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-12">
-          <div class="p-2 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
-            <Terminal class="w-6 h-6" />
-          </div>
-          <h2 class="text-3xl font-bold font-mono text-slate-900 dark:text-slate-100">
-            <span class="text-teal-600 dark:text-teal-400">#</span> About
-          </h2>
-          <div class="flex-grow h-px bg-gradient-to-r from-slate-300 dark:from-slate-700 to-transparent"></div>
+    <section id="publications" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">Publications</h2>
+        <div class="border-y border-[#ddd8cb] dark:border-[#34382f]">
+          {publications.map((publication) => (
+            <article class="grid gap-1 border-b border-[#e7e3d8] py-3 last:border-b-0 dark:border-[#34382f] sm:grid-cols-[72px_minmax(0,1fr)]">
+              <p class="pt-0.5 text-xs text-[#777c70] dark:text-[#9ea39a]">{publication.year}</p>
+              <div>
+                <h3 class="text-[15px] font-semibold leading-5 text-[#20251e] dark:text-[#f1efe7]">{publication.title}</h3>
+                {publication.authors.length > 0 && <p class="mt-1 text-xs leading-5 text-[#686d62] dark:text-[#adb1a6]">{publication.authors.join(', ')}</p>}
+                <p class="mt-0.5 text-xs text-[#777c70] dark:text-[#9ea39a]">{publication.venue}</p>
+                <div class="mt-1.5 flex flex-wrap gap-3 text-xs">
+                  {publication.pdfUrl && <a class="font-medium text-[#8b503d] underline underline-offset-2 dark:text-[#d89a82]" href={publication.pdfUrl} target="_blank" rel="noopener noreferrer">pdf</a>}
+                  {publication.codeUrl && <a class="font-medium text-[#8b503d] underline underline-offset-2 dark:text-[#d89a82]" href={publication.codeUrl} target="_blank" rel="noopener noreferrer">code</a>}
+                  {publication.artifacts.map((artifact) => <a class="text-[#60665b] underline underline-offset-2 dark:text-[#adb1a6]" href={artifact.url} target="_blank" rel="noopener noreferrer">{artifact.name}</a>)}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
+      </div>
+    </section>
 
-        <div class="grid md:grid-cols-5 gap-12">
-          <!-- Bio Text -->
-          <div class="md:col-span-3">
-            <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-6 whitespace-pre-line">
-              {about.summary}
-            </p>
-            <div class="flex flex-wrap gap-3 mb-6">
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 shadow-sm">
-                <MapPin class="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                {profile.location}
-              </span>
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 shadow-sm">
-                <KeyRound class="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                Cryptography R&D
-              </span>
-              <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 shadow-sm">
-                <Cpu class="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                Embedded Systems
-              </span>
+    <section id="experience" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">Experience</h2>
+        <div class="border-y border-[#ddd8cb] dark:border-[#34382f]">
+          <article class="border-b border-[#e7e3d8] py-3 dark:border-[#34382f]">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-[15px] font-semibold text-[#20251e] dark:text-[#f1efe7]">⌁ Integrasys · R&D Cryptography Engineer</h3>
+              <p class="shrink-0 text-xs text-[#777c70] dark:text-[#9ea39a]">2025–present</p>
             </div>
-            
-            <!-- Research Insight Quote -->
-            {about.researchInsight && (
-              <blockquote class="border-l-4 border-teal-500/50 pl-4 py-2 bg-white dark:bg-slate-800/30 rounded-r-lg shadow-sm">
-                <p class="text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed">
-                  "{about.researchInsight}"
-                </p>
-                <cite class="text-xs text-teal-600 dark:text-teal-400 font-mono mt-2 block">— Research Philosophy</cite>
-              </blockquote>
-            )}
-          </div>
+            <p class="mt-1 max-w-[650px] text-sm leading-6 text-[#666b60] dark:text-[#aeb2a6]">EU Defence Fund cryptography programs, hybrid quantum-safe systems, and lightweight implementations for constrained devices.</p>
+          </article>
+          <article class="py-3">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="text-[15px] font-semibold text-[#20251e] dark:text-[#f1efe7]">Australian National University · PhD Candidate</h3>
+              <p class="shrink-0 text-xs text-[#777c70] dark:text-[#9ea39a]">present</p>
+            </div>
+            <p class="mt-1 max-w-[650px] text-sm leading-6 text-[#666b60] dark:text-[#aeb2a6]">Machine-checked security proofs for post-quantum zero-knowledge proofs in EasyCrypt.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <!-- Highlights -->
-          <div class="md:col-span-2">
-            <h3 class="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">Highlights</h3>
-            <ul class="space-y-3">
-              {about.highlights.map((item) => (
-                <li class="flex items-start gap-3 text-slate-600 dark:text-slate-400">
-                  <span class="text-teal-600 dark:text-teal-400 mt-1">▹</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            
-            <!-- LinkedIn Link -->
-            {profile.linkedin && (
-              <a 
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 mt-6 px-4 py-2 rounded-lg bg-white dark:bg-slate-800/50 text-teal-700 dark:text-teal-300 hover:text-teal-600 dark:hover:text-teal-400 border border-slate-200 dark:border-slate-700/50 hover:border-teal-500/50 transition-all shadow-sm"
+    <section id="gallery" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">Events</h2>
+        <div>
+          <div class="flex gap-3 overflow-x-auto pb-2" aria-label="Conference gallery">
+            {conferencePhotos.map((photo) => (
+              <button
+                type="button"
+                class="group w-[132px] shrink-0 text-left"
+                data-gallery-image={photo.imageUrl}
+                data-gallery-title={photo.title}
+                data-gallery-detail={`${photo.event} · ${photo.location}`}
+                aria-label={`Open preview: ${photo.title}`}
               >
-                <Linkedin class="w-4 h-4" />
-                Connect on LinkedIn
-              </a>
-            )}
+                <img src={photo.imageUrl} alt={photo.description || photo.title} width="132" height="88" class="h-[88px] w-[132px] object-cover ring-1 ring-[#d7d1c2] transition-opacity group-hover:opacity-80 dark:ring-[#41463a]" loading="lazy" />
+                <span class="mt-1 block text-xs font-semibold leading-4 text-[#30352e] dark:text-[#d6d7cf]">{photo.event}</span>
+                <span class="block text-[11px] text-[#777c70] dark:text-[#9ea39a]">{photo.location} · {photo.date}</span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- PUBLICATIONS / RESEARCH SECTION -->
-    <!-- ============================================ -->
-    <section id="publications" class="py-24 bg-white dark:bg-slate-950/50 transition-colors duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-4">
-          <div class="p-2 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
-            <BookOpen class="w-6 h-6" />
-          </div>
-          <h2 class="text-3xl font-bold font-mono text-slate-900 dark:text-slate-100">
-            <span class="text-teal-600 dark:text-teal-400">#</span> Research & Publications
-          </h2>
-          <div class="flex-grow h-px bg-gradient-to-r from-slate-300 dark:from-slate-700 to-transparent"></div>
-        </div>
-        
-        <p class="text-slate-600 dark:text-slate-400 mb-12 max-w-3xl">
-          My research revolves around building safe and secure cryptographic systems. I have so far published 2 papers on <strong class="text-teal-600 dark:text-teal-400">Hard-to-Find Bugs (HFBs)</strong> — vulnerabilities that only manifest under rare conditions and evade conventional testing.
-        </p>
+    <dialog id="gallery-dialog" class="m-auto max-h-[90vh] w-[min(900px,calc(100%-24px))] bg-transparent p-0 backdrop:bg-black/75">
+      <div class="relative bg-[#f7f5ef] p-3 dark:bg-[#171916]">
+        <button type="button" id="gallery-close" class="absolute right-5 top-5 z-10 flex h-8 w-8 items-center justify-center bg-[#20251e] text-sm text-white dark:bg-[#f1efe7] dark:text-[#20251e]" aria-label="Close preview">×</button>
+        <img id="gallery-dialog-image" src="" alt="" class="max-h-[72vh] w-full object-contain" />
+        <p id="gallery-dialog-title" class="mt-2 text-sm font-semibold text-[#20251e] dark:text-[#f1efe7]"></p>
+        <p id="gallery-dialog-detail" class="text-xs text-[#777c70] dark:text-[#9ea39a]"></p>
+      </div>
+    </dialog>
 
-        <!-- Publications List -->
-        <div class="space-y-8">
-          {publications.map((pub) => (
-            <PaperCard {...pub} />
-          ))}
+    <script is:inline>
+      const dialog = document.getElementById('gallery-dialog');
+      const dialogImage = document.getElementById('gallery-dialog-image');
+      const dialogTitle = document.getElementById('gallery-dialog-title');
+      const dialogDetail = document.getElementById('gallery-dialog-detail');
+      document.querySelectorAll('[data-gallery-image]').forEach((button) => {
+        button.addEventListener('click', () => {
+          dialogImage.src = button.dataset.galleryImage;
+          dialogImage.alt = button.dataset.galleryTitle;
+          dialogTitle.textContent = button.dataset.galleryTitle;
+          dialogDetail.textContent = button.dataset.galleryDetail;
+          dialog.showModal();
+        });
+      });
+      document.getElementById('gallery-close')?.addEventListener('click', () => dialog.close());
+      dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
+
+    <section id="projects" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">Project</h2>
+        <article class="border-y border-[#ddd8cb] py-3 dark:border-[#34382f]">
+          <h3 class="text-[15px] font-semibold text-[#20251e] dark:text-[#f1efe7]">
+            <a class="inline-flex items-center gap-1 hover:text-[#8b503d] dark:hover:text-[#d89a82]" href={oauthProject.githubUrl} target="_blank" rel="noopener noreferrer">{oauthProject.title} <ArrowUpRight class="h-3 w-3" /></a>
+          </h3>
+          <p class="mt-1 max-w-[650px] text-sm leading-6 text-[#666b60] dark:text-[#aeb2a6]">{oauthProject.description}</p>
+          <p class="mt-1 text-xs text-[#777c70] dark:text-[#9ea39a]">{oauthProject.techStack}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="funding" class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto grid max-w-[820px] gap-3 px-5 py-8 sm:px-8 md:grid-cols-[110px_minmax(0,1fr)]">
+        <h2 class="text-xs font-bold uppercase tracking-wide text-[#777c70] dark:text-[#9ea39a]">Funding</h2>
+        <div class="border-y border-[#ddd8cb] py-3 text-sm leading-6 text-[#666b60] dark:border-[#34382f] dark:text-[#aeb2a6]">
+          <p><span class="font-semibold text-[#20251e] dark:text-[#f1efe7]">EU Defence Fund · National defence calls</span><br />Co-authored proposals that secured multi-million-euro consortium funding for European cybersecurity and cryptography R&D programmes.</p>
+          <p class="mt-3"><a href="https://study.anu.edu.au/scholarships/find-scholarship/anu-university-research-scholarships" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#20251e] underline underline-offset-2 hover:text-[#8b503d] dark:text-[#f1efe7] dark:hover:text-[#d89a82]">ANU University Research Scholarships</a><br />Salary award · Australian National University.</p>
+          <p class="mt-3"><a href="https://study.anu.edu.au/scholarships/find-scholarship/hdr-fee-remission-merit-scholarship" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#20251e] underline underline-offset-2 hover:text-[#8b503d] dark:text-[#f1efe7] dark:hover:text-[#d89a82]">HDR Fee Remission Merit Scholarship</a><br />Fee remission award · Australian National University.</p>
         </div>
       </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- READING LIST SECTION (Simplified) -->
-    <!-- ============================================ -->
-    <section id="reading" class="py-24 bg-slate-100/50 dark:bg-slate-900/50 transition-colors duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-4">
-          <div class="p-2 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
-            <BookOpen class="w-6 h-6" />
-          </div>
-          <h2 class="text-3xl font-bold font-mono text-slate-900 dark:text-slate-100">
-            <span class="text-teal-600 dark:text-teal-400">#</span> What I Read
-          </h2>
-          <div class="flex-grow h-px bg-gradient-to-r from-slate-300 dark:from-slate-700 to-transparent"></div>
-        </div>
-        
-        <div class="grid md:grid-cols-2 gap-8 items-start">
-          <!-- Description & PDF Link -->
-          <div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 shadow-sm">
-            <p class="text-slate-700 dark:text-slate-300 leading-relaxed mb-6">
-              {readingList.description}
-            </p>
-            
-            <a
-              href={readingList.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group inline-flex items-center gap-3 px-5 py-3 rounded-lg bg-gradient-to-r from-teal-500/10 to-sky-500/10 text-teal-700 dark:text-teal-300 hover:text-teal-600 dark:hover:text-teal-200 hover:from-teal-500/20 hover:to-sky-500/20 border border-teal-500/30 hover:border-teal-400/50 transition-all duration-300"
-            >
-              <FileText class="w-5 h-5" />
-              <span class="font-semibold">View Full Reading List (PDF)</span>
-              <ChevronRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-            
-            <p class="text-xs text-slate-500 mt-4 font-mono">
-              Last updated: {readingList.lastUpdated}
-            </p>
-          </div>
-          
-          <!-- Highlights Preview -->
-          <div>
-            <h3 class="text-sm font-mono text-slate-500 uppercase tracking-wider mb-4">Featured Topics</h3>
-            <ul class="space-y-3">
-              {readingList.highlights.map((item) => (
-                <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800/30 px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700/30 shadow-sm">
-                  <BookOpen class="w-4 h-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- CONFERENCE GALLERY SECTION -->
-    <!-- ============================================ -->
-    <section id="gallery" class="py-24 bg-white dark:bg-slate-950/50 transition-colors duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-4">
-          <div class="p-2 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
-            <Camera class="w-6 h-6" />
-          </div>
-          <h2 class="text-3xl font-bold font-mono text-slate-900 dark:text-slate-100">
-            <span class="text-teal-600 dark:text-teal-400">#</span> Conferences & Events
-          </h2>
-          <div class="flex-grow h-px bg-gradient-to-r from-slate-300 dark:from-slate-700 to-transparent"></div>
-        </div>
-        
-        <p class="text-slate-600 dark:text-slate-400 mb-12 max-w-2xl">
-          Presenting research and connecting with the cryptography community at international conferences.
-        </p>
-
-        <!-- Conference Gallery Grid -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {conferencePhotos.map((photo) => (
-            <ConferenceCard {...photo} />
-          ))}
-        </div>
-        
-        {conferencePhotos.length === 0 && (
-          <div class="text-center py-12 bg-slate-100 dark:bg-slate-800/30 rounded-xl border border-slate-200 dark:border-slate-700/30">
-            <Camera class="w-12 h-12 text-slate-400 dark:text-slate-600 mx-auto mb-4" />
-            <p class="text-slate-500">Conference photos coming soon</p>
-          </div>
-        )}
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- PROJECTS SECTION -->
-    <!-- ============================================ -->
-    <section id="projects" class="py-24 bg-slate-100/50 dark:bg-slate-900/50 transition-colors duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-4">
-          <div class="p-2 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
-            <Cpu class="w-6 h-6" />
-          </div>
-          <h2 class="text-3xl font-bold font-mono text-slate-900 dark:text-slate-100">
-            <span class="text-teal-600 dark:text-teal-400">#</span> Projects
-          </h2>
-          <div class="flex-grow h-px bg-gradient-to-r from-slate-300 dark:from-slate-700 to-transparent"></div>
-        </div>
-        
-        <p class="text-slate-600 dark:text-slate-400 mb-12 max-w-2xl">
-          Open-source tools and applications spanning security, cryptography, and systems programming.
-        </p>
-
-        <!-- Projects Grid -->
-        <div class="grid sm:grid-cols-2 gap-6">
-          {projects.filter(p => p.featured).map((project) => (
-            <ProjectCard {...project} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ -->
-    <!-- SKILLS / TECH STACK SECTION -->
-    <!-- ============================================ -->
-    <section id="skills" class="py-24 bg-white dark:bg-slate-950/50 transition-colors duration-300">
-    <section class="py-24 bg-slate-100/50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800/50 transition-colors duration-300">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-6">
-          Let's Work Together
-        </h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto">
-          Interested in collaboration, research opportunities, or just want to discuss cryptography? I'd love to hear from you.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-          {profile.signal && (
-            <div class="group inline-flex items-center gap-3 px-8 py-4 text-lg font-medium rounded-lg bg-teal-600 dark:bg-teal-500 text-white dark:text-slate-900 shadow-lg shadow-teal-500/25">
-              <MessageCircle class="w-5 h-5" />
-              <span>Signal:</span>
-              <span class="font-mono font-bold">{profile.signal}</span>
-              <span class="text-xs opacity-75">(preferred)</span>
-            </div>
-          )}
-          <a
-            href={`mailto:${profile.email}`}
-            class="group inline-flex items-center gap-2 px-8 py-4 text-lg font-medium rounded-lg bg-white dark:bg-slate-800/50 text-teal-700 dark:text-teal-300 hover:text-teal-600 dark:hover:text-teal-200 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 hover:border-teal-500/50 transition-all duration-300 shadow-sm"
-          >
-            <Mail class="w-5 h-5" />
-            Say Hello
-            <ChevronRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </div>
+    <section class="border-t border-[#ddd8cb] dark:border-[#34382f]">
+      <div class="mx-auto flex max-w-[820px] items-center justify-between gap-4 px-5 py-7 sm:px-8">
+        <p class="text-sm text-[#666b60] dark:text-[#aeb2a6]">Interested in research or collaboration?</p>
+        <a class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#8b503d] underline underline-offset-4 dark:text-[#d89a82]" href={`mailto:${profile.email}?subject=Cryptography%20research%20enquiry`}><Mail class="h-3.5 w-3.5" /> Email</a>
       </div>
     </section>
   </main>

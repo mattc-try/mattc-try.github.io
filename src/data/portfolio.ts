@@ -5,27 +5,28 @@
 // Personal Information
 export const profile = {
   name: "Matteo Steinbach",
-  title: "Cryptography Researcher & Cybersecurity Engineer",
-  tagline: "Specializing in Post-Quantum Cryptography, constrained device optimization, and secure communication systems.",
-  location: "Luxembourg",
+  title: "PhD candidate in Mathematics and Computing · Cryptography researcher · R&D engineer",
+  tagline: "Post-quantum cryptography, machine-checked security proofs, and secure cryptographic engineering.",
+  location: "Luxembourg / Canberra",
   email: "matteo.steinbach.pro@gmail.com",
   github: "https://github.com/mattc-try",
-  linkedin: "https://linkedin.com/in/matteo-steinbach", // Update with your actual LinkedIn URL
-  twitter: "", // Add your Twitter/X URL if you have one
-  signal: "tomato.74", // Signal username
-  resumeUrl: "/cv/matteo-steinbach-cv.pdf", // Resume PDF in public/cv/ folder
+  linkedin: "https://linkedin.com/in/matteo-steinbach",
+  orcid: "https://orcid.org/0009-0003-5363-1308",
+  twitter: "",
+  signal: "tomato.74",
+  resumeUrl: "/cv/matteo-steinbach-cv.pdf",
 };
 
 // Bio/About Section
 export const about = {
-  summary: `I currently work as a Cryptography R&D Engineer contributing to European research projects on quantum-resistant systems, while collaborating on academic research. My background spans classical and post-quantum cryptography (Kyber, Dilithium) and low-level optimization (C, Assembly, Rust).`,
+  summary: `I am a PhD candidate in Mathematics and Computing at the Australian National University, researching machine-checked security proofs for post-quantum zero-knowledge proofs in EasyCrypt. I also work as an R&D Cryptography Engineer at Integrasys, contributing to European-funded quantum-safe communication and embedded cryptography projects.`,
   highlights: [
     "Cryptography R&D Engineer at Integrasys SA",
     "BSc Computer Science, University of Luxembourg (Very Good)",
     "Post-Quantum Cryptography (Hash-based, Lattice-based, Code-based)",
     "Constrained device optimization",
   ],
-  researchInsight: `I want to become a complete crypographer (cryptologist), I am interested and always learning anything revolving around it. I work on new academic research projects involving key combinations, cryptanalysis and computer verified cryptography, and I am looking forward to exploring more.`,
+  researchInsight: `My work combines formal verification, cryptographic implementation, and practical security analysis. I am broadly interested in building cryptographic systems that are both theoretically sound and reliable in real software and hardware.`,
 };
 
 // Publications - Peer-reviewed papers
@@ -91,6 +92,20 @@ export const publications: Publication[] = [
     pdfUrl: "/papers/classical-hard-to-find-bugs.pdf", // Add your PDF to public/papers/
     codeUrl: "https://github.com/mattc-try/wycheproof-c",
     tags: ["RSA", "ECC", "OpenSSL", "Vulnerability Research", "Testing Methodology"],
+  },
+  {
+    id: "pqqs-hybrid-key-exchange",
+    title: "Enclave-Anchored Hybrid Quantum-Safe Key Exchange",
+    authors: ["Matteo Steinbach"],
+    venue: "ACM Conference on Post-Quantum and Quantum-based Security (PQQS)",
+    year: 2026,
+    abstract: "An enclave-anchored hybrid quantum-safe key exchange combining classical and post-quantum cryptography with quantum cryptographic mechanisms.",
+    contributions: [
+      "Combines classical and post-quantum key exchange mechanisms with enclave-assisted trust anchors",
+      "Targets practical quantum-safe security for deployed cryptographic systems",
+    ],
+    artifacts: [],
+    tags: ["Quantum-Safe Cryptography", "Hybrid Key Exchange", "Enclaves", "PQQS"],
   },
 ];
 
@@ -263,9 +278,9 @@ export const skillCategories: SkillCategory[] = [
 // Navigation items
 export const navItems = [
   { label: "About", href: "#about" },
-  { label: "Research", href: "#publications" },
-  { label: "Reading", href: "#reading" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
+  { label: "Publications", href: "#publications" },
+  { label: "Experience", href: "#experience" },
+  { label: "Events", href: "#gallery" },
+  { label: "Project", href: "#projects" },
+  { label: "Funding", href: "#funding" },
 ];

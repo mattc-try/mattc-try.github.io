@@ -6,7 +6,10 @@ const currentYear = new Date().getFullYear();
 
 <footer class="ml-0 border-t border-[#ddd8cb] bg-[#f7f5ef] md:ml-[180px] dark:border-[#34382f] dark:bg-[#171916]">
   <div class="mx-auto flex max-w-[820px] items-center justify-between gap-4 px-5 py-5 sm:px-8">
-    <p class="text-xs text-[#777c70] dark:text-[#9ea39a]">© {currentYear} {profile.name}</p>
+    <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+      <p class="text-xs text-[#777c70] dark:text-[#9ea39a]">© {currentYear} {profile.name}</p>
+      <a href={`mailto:${profile.email}`} class="text-xs text-[#60665b] underline underline-offset-2 hover:text-[#8b503d] dark:text-[#adb1a6] dark:hover:text-[#d89a82]">{profile.email}</a>
+    </div>
     <div class="flex items-center gap-3">
       <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-[#60665b] hover:text-[#8b503d] dark:text-[#adb1a6] dark:hover:text-[#d89a82]" aria-label="GitHub"><Github class="h-4 w-4" /></a>
       {profile.linkedin && <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="text-[#60665b] hover:text-[#8b503d] dark:text-[#adb1a6] dark:hover:text-[#d89a82]" aria-label="LinkedIn"><Linkedin class="h-4 w-4" /></a>}
